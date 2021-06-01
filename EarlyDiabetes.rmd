@@ -1,0 +1,80 @@
+---
+title: "Early Diabetes Report"
+author: "Daniel Alexander"
+date: "5/31/2021"
+output:
+  html_document:
+    number_sections: yes
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Describes the dataset and variables, and summarizes the goal of the project and key steps that were performed
+
+The goal of this HarvardX PH125.9x Data Science Capstone Project is to use data science skills to develop a model that can predict diabetes diagnoses using early health predictors.  The dataset for this project is the Early Stage Diabetes Risk Prediction Dataset consisting of 520 patient observations of the following 17 variables:
+
+* Age
+* Gender
+* Polyuria
+* Polydipsia
+* Sudden Weight Loss
+* Weakness
+* Polyphagia
+* Genital Thrush
+* Visual Blurring
+* Itching
+* Irritability
+* Delayed Healing
+* Partial Paresis
+* Muscle Stiffness
+* Alopecia
+* Obesity
+
+The dataset was collected using direct questionnaires from the paitents of Sylhet Diabetes Hospital in Sylhet, Bangladesh and can be found at https://archive.ics.uci.edu/ml/machine-learning-databases/00529/diabetes_data_upload.csv.  
+
+I performed the key steps learned during the course to accomplish the goal. The steps included exploring the data to understand its structure, visualizing the data to uncover distributions and relationships, developing models using Logistic Regression and Random Forest Classification to satisfy the goal, then testing it to find which model was most accurate.  
+
+
+
+# Methods and Analysis
+
+My first step was to download the dataset from the ICS website and convert it to a data frame.  Next, I performed some exploratory data analysis to learn more about the data.  
+
+```{r}
+str(data_set)
+```
+
+Explains the process and techniques used, including data cleaning, data exploration and visualization, any insights gained, and your modeling approach. At least two different models or algorithms must be used, with at least one being more advanced than linear or logistic regression for prediction problems
+
+# Results
+
+Presents the modeling results and discusses the model performance
+
+# Conclusion and Future Work
+
+Gives a brief summary of the report, its potential impact, its limitations, and future work
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
