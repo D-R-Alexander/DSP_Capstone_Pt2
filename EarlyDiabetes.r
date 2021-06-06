@@ -52,7 +52,6 @@ head(data_set)
 
 # See how many unique values are in the data set
 sapply(data_set, function(x) length(unique(x)))
-# Most only have 2 unique values so can convert to factors
 
 # See if there are any NA values
 sapply(data_set, function(x) sum(is.na(x)))
@@ -97,29 +96,9 @@ ggplot(data_set,aes(Polyuria,class)) + geom_jitter()
 ggplot(data_set,aes(Polydipsia,class)) + geom_jitter()
 ggplot(data_set,aes(Alopecia,class)) + geom_jitter()
 
-#ggplot(data_set,aes(Polyuria,class)) + geom_jitter(col=sapply(data_set$Gender,switch,"Male"="blue","Female"="pink"))
-#ggplot(data_set,aes(Polydipsia,class)) + geom_jitter(col=sapply(data_set$Gender,switch,"Male"="blue","Female"="pink"))
-#ggplot(data_set,aes(Alopecia,class)) + geom_jitter(col=sapply(data_set$Gender,switch,"Male"="blue","Female"="pink"))
-
-#Based on scatterplot, Alopecia does not seem so distinct but Polyuria and
-# Polydipsia seem to be more strongly correlated
-
-###NOT SURE IF I NEED ANY OF THE FOLLOWING YET - Go to DO THE WORK
+### Create mosaicplots to visualize Polyuria and Polydipsia
 mosaicplot(table(data_set$Polyuria, data_set$class), main = "Diabetic by Polyuria", shade = TRUE, legend = TRUE)
 mosaicplot(table(data_set$Polydipsia, data_set$class), main = "Diabetic by Polydipsia", shade = TRUE, legend = TRUE)
-
-mosaic(xtabs(~class + Polyuria + Gender, data_set), 
-       shade = TRUE,
-       legend = TRUE,
-       main = "Title2")
-
-# Data Cleaning
-
-ggplot(data = data_set, aes(x = Polydipsia, y = Age, fill = factor(class))) + 
-  geom_boxplot() + 
-  geom_hline(aes(yintercept = mean(Age)), 
-             colour = "red", linetype = "dashed", lwd = 2) +
-  theme_bw()
 
 ##########################################################
 # DO THE WORK
@@ -145,9 +124,7 @@ LR_result <- ifelse(LR_result > 0.5,"Positive","Negative")
 LR_result <- as.factor(LR_result)
 confusionMatrix(data=LR_result, reference=test_set$class)
 
-# The AUC ROC is one of the most important evaluation metrics for checking
-# any classification model's performance:
-# https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5
+# Check the model's performance with AUC-ROC:
 prediction1 <- predict(LR_model, newdata=test_set, type="response")
 
 ROC_pred <- prediction(prediction1, test_set$class)
@@ -167,6 +144,7 @@ legend("topright", colnames(RF_model$err.rate), col = 1:3, fill = 1:3)
 
 # Rank the variables and plot on bar graph
 importance <- importance(RF_model)
+
 # Lower Gini means stronger factor in partitioning data into classes
 varImportance <- data.frame(Variables = row.names(importance), Importance = round(importance[ ,'MeanDecreaseGini'],2))
 
